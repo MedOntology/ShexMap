@@ -1,0 +1,12 @@
+<#1iri_pass-iri> a sht:ValidationTest ;
+    mf:name "1iri_pass-iri" ;
+    sht:trait sht:NodeKind ;
+    rdfs:comment "<S1> { <p1> IRI } on { <s1> <p1> <o1> }" ;
+    mf:status mf:Approved ;
+    mf:action [
+      sht:schema <../schemas/1iri.shex> ;
+      sht:shape <http://a.example/S1> ;
+      sht:data <Is1_Ip1_Io1.ttl> ;
+      sht:focus <http://a.example/s1>
+    ]
+    .
