@@ -9,13 +9,13 @@ public class ValidatorTest {
     @Test
     public void test() {
         Validator validator = new Validator();
-        validator.loadExample("1iri.shex");
+        validator.validateSchema("1iri.shex", "http://a.example", "Is1_Ip1_Io1.ttl");
     }
 
     @Test
     public void test2() {
         Validator validator = new Validator();
-        validator.loadExample1("shexmap_example1.shex");
+        validator.validateSchema("shexmap_example1.shex", "http://dam.example/med", "shexmap_data_example1.ttl");
     }
 
 }

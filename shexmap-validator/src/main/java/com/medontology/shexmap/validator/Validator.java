@@ -15,15 +15,9 @@ public class Validator {
         System.out.println("Hello world!");
     }
 
-    public void loadExample(String resourcePath) {
-        ShexSchema schema = Shex.readSchema(resourcePath, "http://a.example");
-        Graph graph = RDFDataMgr.loadGraph("Is1_Ip1_Io1.ttl");
-        ShexValidator.get().validate(graph, schema, schema.getShapes().get(0), graph.find().next().getSubject());
-    }
-
-    public void loadExample1(String resourcePath) {
-        ShexSchema schema = Shex.readSchema(resourcePath, "http://dam.example/med");
-        Graph graph = RDFDataMgr.loadGraph("shexmap_data_example1.ttl");
+    public void validateSchema(String schemaPath, String baseUri, String dataPath) {
+        ShexSchema schema = Shex.readSchema(schemaPath, baseUri);
+        Graph graph = RDFDataMgr.loadGraph(dataPath);
         ShexValidator.get().validate(graph, schema, schema.getShapes().get(0), graph.find().next().getSubject());
     }
 }
