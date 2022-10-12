@@ -1,2 +1,2 @@
 # ShexMap
-ShexMap utility based on the Jena Shex project
+[ShexMap](https://shex.io/extensions/Map/) utility based on the Jena Shex project
