@@ -13,7 +13,7 @@ public class Validator {
         System.out.println("Hello world!");
     }
 
-    public boolean validateSchema(String schemaPath, String schemaBase, String dataBase, String dataPath, String nodeStr, String shapeStr) {
+    public boolean validateSchema(String dataBase, String dataPath, String nodeStr, String schemaPath, String schemaBase, String shapeStr) {
         Model model = ModelFactory.createDefaultModel();
         Node node = model.createResource(nodeStr).asNode();
         Node shapeRef = model.createResource(shapeStr).asNode();
