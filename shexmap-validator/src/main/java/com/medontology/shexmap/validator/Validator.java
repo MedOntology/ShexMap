@@ -13,15 +13,15 @@ public class Validator {
         System.out.println("Hello world!");
     }
 
-    public boolean validateSchema(String schemaPath, String schemaBase, String dataPath, String nodeStr, String shapeStr) {
+    public boolean validateSchema(String schemaPath, String schemaBase, String dataBase, String dataPath, String nodeStr, String shapeStr) {
         Model model = ModelFactory.createDefaultModel();
         Node node = model.createResource(nodeStr).asNode();
         Node shapeRef = model.createResource(shapeStr).asNode();
         ShexMapBuilder b = new ShexMapBuilder();
         b.add(node, shapeRef);
 
-        Graph graph = RDFDataMgr.loadGraph(dataPath);
-        //RDFDataMgr.read(Model model, String uri, String base, Lang hintLang)
+        RDFDataMgr.read(model, dataPath, dataBase, Lang.TTL);
+        Graph graph = model.getGraph();
         ShexSchema schema = Shex.readSchema(schemaPath, schemaBase);
         ShexReport report = ShexValidator.get().validate(graph, schema, b.build());
 

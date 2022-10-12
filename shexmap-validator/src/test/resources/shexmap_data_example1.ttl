@@ -1,6 +1,5 @@
 PREFIX  med: <http://dam.example/med#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-BASE <http://dam.example/data/>
 
 <PatientX>
     med:name "Sue" ;
