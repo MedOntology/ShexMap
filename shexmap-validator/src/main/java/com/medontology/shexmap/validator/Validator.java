@@ -7,24 +7,59 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shex.*;
+import org.apache.jena.irix.IRIxResolver;
+import org.apache.jena.irix.IRIx;
 
 public class Validator {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
 
-    public boolean validateSchema(String dataBase, String dataPath, String nodeStr, String schemaPath, String schemaBase, String shapeStr) {
-        Model model = ModelFactory.createDefaultModel();
-        Node node = model.createResource(nodeStr).asNode();
-        Node shapeRef = model.createResource(shapeStr).asNode();
-        ShexMapBuilder b = new ShexMapBuilder();
-        b.add(node, shapeRef);
+    public boolean validateSchema(Load data, Load schema) {
+        Resolver r = new Resolver();
 
-        RDFDataMgr.read(model, dataPath, dataBase, Lang.TTL);
-        Graph graph = model.getGraph();
-        ShexSchema schema = Shex.readSchema(schemaPath, schemaBase);
-        ShexReport report = ShexValidator.get().validate(graph, schema, b.build());
+        ShexMap shapeMap = r.shapeMap(r.node(data.node, data.base), r.node(schema.node, schema.base));
+        Graph graph = r.readGraph(data.path, data.base);
+        ShexSchema schema1 = Shex.readSchema(schema.path, schema.base);
+        ShexReport report = ShexValidator.get().validate(graph, schema1, shapeMap);
 
         return report.conforms();
+    }
+    public static class Load {
+        String path;
+        String base;
+        String node;
+        Load(String path, String base, String node) {
+            this.path = path;
+            this.base = base;
+            this.node = node;
+        }
+    }
+}
+
+/**
+ * Crap work to make Validator more literate.
+ * Holds a Model and an IRIxResolver.
+ */
+class Resolver {
+    Model model = ModelFactory.createDefaultModel();
+    IRIxResolver resolver = IRIxResolver.create().base("").resolve(true).allowRelative(false).build();
+
+    Node node (String rel, String base) {
+        IRIx b = IRIx.create(base);
+        IRIxResolver r2 = resolver.resetBase(b); // maybe cheaper than creating one from scratch???
+        IRIx resolvedI = r2.resolve(rel);
+        return model.createResource(resolvedI.toString()).asNode();
+    }
+
+    public ShexMap shapeMap(Node node, Node shapeRef) {
+        ShexMapBuilder mb = new ShexMapBuilder();
+        mb.add(node, shapeRef);
+        return mb.build();
+    }
+
+    public Graph readGraph(String dataPath, String dataBase) {
+        RDFDataMgr.read(model, dataPath, dataBase, Lang.TTL);
+        return model.getGraph();
     }
 }

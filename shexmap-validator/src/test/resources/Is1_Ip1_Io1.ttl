@@ -1,1 +1,2 @@
-<http://a.example/s1> <http://a.example/p1> <http://a.example/o1> .
+PREFIX a: <>
+<s1> <p1> <o1> .
