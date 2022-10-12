@@ -1,14 +1,10 @@
 package com.medontology.shexmap.validator;
 
 import org.apache.jena.graph.Graph;
-import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shex.Shex;
-import org.apache.jena.shex.ShexMap;
 import org.apache.jena.shex.ShexSchema;
 import org.apache.jena.shex.ShexValidator;
-
-import java.io.InputStream;
 
 public class Validator {
     public static void main(String[] args) {
