@@ -12,4 +12,10 @@ public class ValidatorTest {
         validator.loadExample("1iri.shex");
     }
 
+    @Test
+    public void test2() {
+        Validator validator = new Validator();
+        validator.loadExample1("shexmap_example1.shex");
+    }
+
 }

@@ -1,0 +1,25 @@
+PREFIX  med: <http://dam.example/med#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+<PatientX>
+    med:name "Sue" ;
+    med:vitals <tag:b0>, <tag:b1> .
+
+<tag:b0>
+    med:systolic [
+      med:value "110"^^xsd:integer ;
+      med:units "mmHg"
+    ] ;
+    med:diastolic [
+      med:value "70"^^xsd:float ;
+      med:units "mmHg"
+    ] .
+<tag:b1>
+    med:systolic [
+      med:value "111"^^xsd:float ;
+      med:units "mmHg"
+    ] ;
+    med:diastolic [
+      med:value "71"^^xsd:float ;
+      med:units "mmHg"
+    ] .
