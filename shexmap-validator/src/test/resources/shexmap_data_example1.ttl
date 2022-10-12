@@ -1,5 +1,6 @@
 PREFIX  med: <http://dam.example/med#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+BASE <http://dam.example/data/>
 
 <PatientX>
     med:name "Sue" ;
@@ -7,7 +8,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 <tag:b0>
     med:systolic [
-      med:value "110"^^xsd:integer ;
+      med:value "110"^^xsd:float ;
       med:units "mmHg"
     ] ;
     med:diastolic [
