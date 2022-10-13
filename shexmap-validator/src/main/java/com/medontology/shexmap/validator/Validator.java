@@ -7,7 +7,6 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shex.*;
-import org.apache.jena.irix.IRIxResolver;
 import org.apache.jena.irix.IRIx;
 
 public class Validator {
@@ -43,13 +42,16 @@ public class Validator {
  */
 class Resolver {
     Model model = ModelFactory.createDefaultModel();
-    IRIxResolver resolver = IRIxResolver.create().base("").resolve(true).allowRelative(false).build();
 
     Node node (String rel, String base) {
-        IRIx b = IRIx.create(base);
-        IRIxResolver r2 = resolver.resetBase(b); // maybe cheaper than creating one from scratch???
-        IRIx resolvedI = r2.resolve(rel);
-        return model.createResource(resolvedI.toString()).asNode();
+        String resolved;
+        if (base == null) {
+            resolved = rel;
+        } else {
+            IRIx b = IRIx.create(base);
+            resolved = b.resolve(rel).toString();
+        }
+        return model.createResource(resolved).asNode();
     }
 
     public ShexMap shapeMap(Node node, Node shapeRef) {
