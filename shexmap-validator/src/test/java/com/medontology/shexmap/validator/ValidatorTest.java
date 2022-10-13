@@ -24,8 +24,8 @@ public class ValidatorTest {
     @Test
     public void bpDAMexample() {
         assertTrue(Validator.validateSchema(
-                new Validator.Load("shexmap_example1.shex", "http://dam.example/", "PatientDAM"),
-                new Validator.Load("shexmap_data_example1.ttl", "http://dam.example/data/", "PatientX")
+                new Validator.Load("BPDAM.shex", "http://dam.example/", "PatientDAM"),
+                new Validator.Load("BPDAM_PatientX.ttl", "http://dam.example/data/", "PatientX")
         ).conforms());
     }
 }

@@ -17,9 +17,9 @@ public class Validator {
     /**
      * Load schema and data and validate
      *
-     * @param schema - Load resource
-     * @param data   - Load resource
-     * @return ShExReport from validation
+     * @param schema Load resource
+     * @param data   Load resource
+     * @return       ShExReport from validation
      */
     public static ShexReport validateSchema(Load schema, Load data) {
         Resolver r = new Resolver();
@@ -41,6 +41,12 @@ public class Validator {
         String base;
         String node;
 
+        /**
+         * Specify rooted RDF resource to parse
+         * @param path file path for loadable resource
+         * @param base base URI when loading that resource
+         * @param node point in loaded resource (validation focus or shape name)
+         */
         Load(String path, String base, String node) {
             this.path = path;
             this.base = base;
@@ -57,9 +63,9 @@ class Resolver {
 
     /**
      * Emulate javascript's URL(rel, base) interface 'cause I [ericP] assume it has wisdom.
-     * @param rel - a relative IRI to be resolved against base, or an absolute IRI
-     * @param base - if this is null, rel should be absolute
-     * @return Node (technically, a URI_Resource, but that would need casting to Node for some reason)
+     * @param rel  a relative IRI to be resolved against base, or an absolute IRI
+     * @param base if this is null, rel should be absolute
+     * @return     Node (technically, a URI_Resource, but that would need casting to Node for some reason)
      */
     Node node (String rel, String base) {
         String resolved;
@@ -74,9 +80,9 @@ class Resolver {
 
     /**
      * Construct a ShapeMap from a pair of node/shape
-     * @param node node in node/shape pair
+     * @param node     node in node/shape pair
      * @param shapeRef shape in node/shape pair
-     * @return ShapeMap (currently called `ShExMap`, but I intend to PR that)
+     * @return         ShapeMap (currently called `ShExMap`, but I intend to PR that)
      */
     public ShexMap shapeMap(Node node, Node shapeRef) {
         ShexMapBuilder mb = new ShexMapBuilder();
@@ -87,8 +93,8 @@ class Resolver {
     /**
      * Emulate jena-shex's readSchema interface for Turtle files
      *
-     * @param path - path to Turtle file to parse
-     * @param base - base for URL resolution
+     * @param path path to Turtle file to parse
+     * @param base base for URL resolution
      * @return ShEx schema
      */
     public Graph readTurtle(String path, String base) {

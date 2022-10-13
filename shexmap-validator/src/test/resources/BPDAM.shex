@@ -7,7 +7,7 @@ start = @<PatientDAM>
 
 <PatientDAM> {
   :name LITERAL %Map:{ bp:name %};
-#  :vitals @<BPunitsDAM>* %Map:{ bp:XXX %}
+  :vitals @<BPunitsDAM>* %Map:{ bp:XXX %}
 }
 
 <BPunitsDAM> {
